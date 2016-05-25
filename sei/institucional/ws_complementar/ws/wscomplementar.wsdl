@@ -15,8 +15,8 @@
   <wsdl:message name="consultarUsuarioExternoRequest">
     <wsdl:part name="SiglaSistema" type="xsd:string"/>
     <wsdl:part name="IdentificacaoServico" type="xsd:string"/>
-    <wsdl:part name="Cpf" type="xsd:string"/>
     <wsdl:part name="Email" type="xsd:string"/>
+    <wsdl:part name="Cpf" type="xsd:string"/>
   </wsdl:message>
 
   <wsdl:message name="consultarUsuarioExternoResponse">
