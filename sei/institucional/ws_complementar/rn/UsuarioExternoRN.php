@@ -33,7 +33,7 @@ class UsuarioExternoRN extends InfraRN {
 		}
 	}
 	
-	public function consultarExternoControlado($Cpf){
+	public function consultarExternoControlado($Sigla){
 		try {
 			$objInfraException = new InfraException();
 	
@@ -59,7 +59,7 @@ class UsuarioExternoRN extends InfraRN {
 			$objUsuarioExternoDTO->retDthDataCadastroContato();
 				
 			//Parâmetros para consulta
-			$objUsuarioExternoDTO->setDblCpf(InfraUtil::retirarFormatacao($Cpf), InfraDTO::$OPER_IGUAL);
+			$objUsuarioExternoDTO->setStrSigla($Sigla, InfraDTO::$OPER_IGUAL);
 	
 			$objUsuarioExternoDTO = self::consultarUsuarioExterno($objUsuarioExternoDTO);
 				
