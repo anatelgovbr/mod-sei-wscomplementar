@@ -64,7 +64,7 @@ class UsuarioExternoRN extends InfraRN {
 			$objUsuarioExternoDTO = self::consultarUsuarioExterno($objUsuarioExternoDTO);
 				
 			if ($objUsuarioExternoDTO==null) {
-				$objInfraException->lancarValidacao('Não existe cadastro de Usuário Externo no SEI com o CPF informado.');
+				$objInfraException->lancarValidacao('Não existe cadastro de Usuário Externo no SEI com o e-mail informado.');
 			}
 	
 			return $objUsuarioExternoDTO;

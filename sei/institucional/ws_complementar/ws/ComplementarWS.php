@@ -20,7 +20,7 @@ class ComplementarWS extends InfraWS {
   	  		$InfraException = new InfraException();
   			
   	    // Valida E-mail.
-  	  	if (! infraUtil::validarEmail($Email)) {
+  	  	if (! InfraUtil::validarEmail($Email)) {
   	  		$InfraException->lancarValidacao('E-mail inválido.');
   	  	}
   	  		 
@@ -45,7 +45,7 @@ class ComplementarWS extends InfraWS {
   		$UsuarioExternoDTO = $UsuarioExternoRN->consultarExterno($Email);
   			
   		// Confirma se o CPF informado é o mesmo do cadastro.
-  		if (strlen(trim($Cpf)) > 0 && ($UsuarioExternoDTO->getDblCpf() !== InfraUtil::retirarFormatacao($Cpf))) {
+  		if (strlen(trim($Cpf)) > 0 && (InfraUtil::formatarCpf($UsuarioExternoDTO->getDblCpf()) !== InfraUtil::formatarCpf($Cpf))) {
   			$InfraException->lancarValidacao('CPF informado não corresponde ao registrado no cadastro do Usuário Externo no SEI.');
   		}
   			
@@ -70,7 +70,7 @@ class ComplementarWS extends InfraWS {
   				'IdUsuario' => $UsuarioExternoDTO->getNumIdUsuario(),
   				'E-mail' => $UsuarioExternoDTO->getStrSigla(),
   				'Nome' => $UsuarioExternoDTO->getStrNome(),
-  				'Cpf' => $UsuarioExternoDTO->getDblCpf(),
+  				'Cpf' => InfraUtil::formatarCpf($UsuarioExternoDTO->getDblCpf()),
   				'SituacaoAtivo' => $UsuarioExternoDTO->getStrSinAtivo(),
   				'LiberacaoCadastro' => $UsuarioExternoDTO->getStrStaTipo(),
   				'Rg' => $UsuarioExternoDTO->getDblRgContato(),
