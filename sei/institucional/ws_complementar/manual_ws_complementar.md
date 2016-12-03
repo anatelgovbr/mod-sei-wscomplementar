@@ -1,6 +1,6 @@
 # Manual do Módulo de Webservice Complementar do SEI
 
- * Para instalar, acesse o arquivo "Leia-me.txt" que segue junto com o código do módulo.
+ * Para instalar, acesse o arquivo "README.md" localizado junto com o código do módulo ou pelo link a seguir: https://softwarepublico.gov.br/gitlab/anatel/mod-sei-wscomplementar/tree/master
  * Endereço do WSDL do módulo: http://[dominio_servidor]/sei/controlador_ws.php?servico=wscomplementar
  * Recomendado utilizar o [software SOAP-UI](http://sourceforge.net/projects/soapui/files/soapui/ Clique aqui para baixar) para testes do módulo.
 
