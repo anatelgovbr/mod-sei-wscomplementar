@@ -39,16 +39,22 @@ class ComplementarWS extends InfraWS {
   			
   		$this->validarAcessoAutorizado(explode(',', str_replace(' ', '', $objServicoDTO->getStrServidor())));
   			
-  		$UsuarioExternoDTO = new UsuarioExternoDTO();
-  		$UsuarioExternoRN = new UsuarioExternoRN();
-  			
+  		$UsuarioExternoDTO = new MdWsComplUsuarioExternoDTO();
+  		$UsuarioExternoRN = new MdWsComplUsuarioExternoRN();
+  		
   		$UsuarioExternoDTO = $UsuarioExternoRN->consultarExterno($Email);
-  			
-  		// Confirma se o CPF informado é o mesmo do cadastro.
-  		if (strlen(trim($Cpf)) > 0 && (InfraUtil::formatarCpf($UsuarioExternoDTO->getDblCpf()) !== InfraUtil::formatarCpf($Cpf))) {
-  			$InfraException->lancarValidacao('CPF informado não corresponde ao registrado no cadastro do Usuário Externo no SEI.');
+  		  		
+  		$contatoDTO = new ContatoDTO();
+  		$contatoDTO->retTodos( true );
+  		$contatoDTO->setNumIdContato( $UsuarioExternoDTO->getNumIdContato() );
+  		$contatoRN = new ContatoRN();
+  		$contatoDTO = $contatoRN->consultarRN0324( $contatoDTO );
+  		$Cpf = $contatoDTO->getDblCpf();
+  		
+  		if (strlen(trim($Cpf)) > 0 && (InfraUtil::formatarCpf( $contatoDTO->getDblCpf() ) !== InfraUtil::formatarCpf($Cpf))) {
+  		  $InfraException->lancarValidacao('CPF informado não corresponde ao registrado no cadastro do Usuário Externo no SEI.');
   		}
-  			
+  		
   		// Usuário Externo Liberado = L, Pendente = P
   		switch ($UsuarioExternoDTO->getStrStaTipo()) {
   			case UsuarioRN::$TU_EXTERNO_PENDENTE :
@@ -66,21 +72,24 @@ class ComplementarWS extends InfraWS {
   
   
   		$ret = array ();
+  		
+  		
+  		
   		$ret[] = (object) array(
   				'IdUsuario' => $UsuarioExternoDTO->getNumIdUsuario(),
   				'E-mail' => $UsuarioExternoDTO->getStrSigla(),
   				'Nome' => $UsuarioExternoDTO->getStrNome(),
-  				'Cpf' => InfraUtil::formatarCpf($UsuarioExternoDTO->getDblCpf()),
+  				'Cpf' => InfraUtil::formatarCpf($Cpf),
   				'SituacaoAtivo' => $UsuarioExternoDTO->getStrSinAtivo(),
   				'LiberacaoCadastro' => $UsuarioExternoDTO->getStrStaTipo(),
   				'Rg' => $UsuarioExternoDTO->getDblRgContato(),
   				'OrgaoExpedidor' => $UsuarioExternoDTO->getStrOrgaoExpedidorContato(),
-  				'Telefone' => $UsuarioExternoDTO->getStrTelefoneContato(),
+  				'Telefone' => $UsuarioExternoDTO->getStrTelefoneFixo(),
   				'Endereco' => $UsuarioExternoDTO->getStrEnderecoContato(),
-  				'Bairro' => $UsuarioExternoDTO->getStrBairroContato(),
-  				'SiglaUf' => $UsuarioExternoDTO->getStrSiglaEstadoContato(),
-  				'NomeCidade' => $UsuarioExternoDTO->getStrNomeCidadeContato(),
-  				'Cep' => $UsuarioExternoDTO->getStrCepContato(),
+  				'Bairro' => $contatoDTO->getStrBairro(),
+  				'SiglaUf' => $contatoDTO->getStrSiglaUf(),
+  				'NomeCidade' => $contatoDTO->getStrNomeCidade(),
+  				'Cep' => $contatoDTO->getStrCep(),
   				'DataCadastro' => $UsuarioExternoDTO->getDthDataCadastroContato());
   
   		return $ret;
@@ -108,21 +117,22 @@ class ComplementarWS extends InfraWS {
 	  $objServicoDTO->retNumIdServico();
 	  $objServicoDTO->retStrIdentificacao();
 	  $objServicoDTO->retStrSiglaUsuario();
-		$objServicoDTO->retNumIdUsuario();
-		$objServicoDTO->retStrServidor();
-		$objServicoDTO->retStrSinLinkExterno();
-		$objServicoDTO->retNumIdContatoUsuario();
-		$objServicoDTO->setNumIdUsuario($objUsuarioDTO->getNumIdUsuario());
-		$objServicoDTO->setStrIdentificacao($IdentificacaoServico);
+	  $objServicoDTO->retNumIdUsuario();
+	  $objServicoDTO->retStrServidor();
+	  $objServicoDTO->retStrSinLinkExterno();
+	  $objServicoDTO->retNumIdContatoUsuario();
+	  $objServicoDTO->setNumIdUsuario($objUsuarioDTO->getNumIdUsuario());
+	  $objServicoDTO->setStrIdentificacao($IdentificacaoServico);
 			
-		$objServicoRN = new ServicoRN();
-		$objServicoDTO = $objServicoRN->consultar($objServicoDTO); 
+	  $objServicoRN = new ServicoRN();
+	  $objServicoDTO = $objServicoRN->consultar($objServicoDTO); 
 			
-		if ($objServicoDTO==null){
-			throw new InfraException('Serviço ['.$IdentificacaoServico.'] do sistema ['.$SiglaSistema.'] não encontrado.');
-		}
+	  if ($objServicoDTO==null){
+		throw new InfraException('Serviço ['.$IdentificacaoServico.'] do sistema ['.$SiglaSistema.'] não encontrado.');
+	  }
 			
-		return $objServicoDTO;
+	  return $objServicoDTO;
+	  
 	}
 }
 

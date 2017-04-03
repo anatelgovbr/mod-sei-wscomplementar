@@ -48,7 +48,7 @@
 
   <wsdl:service name="SeiWScomplementarService">
     <wsdl:port name="SeiWScomplementarPortService" binding="tns:SeiWScomplementarBinding">
-      <soap:address location="[servidor]/institucional/ws_complementar/ws/ComplementarWS.php"/>
+      <soap:address location="[servidor]/modulos/ws_complementar/ws/ComplementarWS.php"/>
     </wsdl:port>
   </wsdl:service>
 
