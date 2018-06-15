@@ -8,7 +8,7 @@
 
 require_once dirname(__FILE__).'/../../../SEI.php';
 
-class UsuarioExternoRN extends InfraRN {
+class MdWsComplUsuarioExternoRN extends InfraRN {
 
 	public function __construct(){
 		parent::__construct();
@@ -18,7 +18,7 @@ class UsuarioExternoRN extends InfraRN {
 		return BancoSEI::getInstance();
 	}
 	
-	protected function consultarUsuarioExterno(UsuarioExternoDTO  $objUsuarioExternoDTO){
+	protected function consultarUsuarioExterno(MdWsComplUsuarioExternoDTO  $objUsuarioExternoDTO){
 		try {
 	
 			//Valida Permissao
@@ -34,27 +34,28 @@ class UsuarioExternoRN extends InfraRN {
 	}
 	
 	public function consultarExternoControlado($Sigla){
+		
 		try {
+			
 			$objInfraException = new InfraException();
 	
-			$objUsuarioExternoDTO = new UsuarioExternoDTO();
+			$objUsuarioExternoDTO = new MdWsComplUsuarioExternoDTO();
 				
 			//campos que serão retornados
 			$objUsuarioExternoDTO->retNumIdUsuario();
 			$objUsuarioExternoDTO->retStrSigla();
 			$objUsuarioExternoDTO->retStrNome();
-			$objUsuarioExternoDTO->retDblCpf();
 			$objUsuarioExternoDTO->retStrSinAtivo();
 			$objUsuarioExternoDTO->retStrStaTipo();
-			//$objUsuarioExternoDTO->retNumIdContato();
+			$objUsuarioExternoDTO->retNumIdContato();
 				
 			$objUsuarioExternoDTO->retDblRgContato();
 			$objUsuarioExternoDTO->retStrOrgaoExpedidorContato();
-			$objUsuarioExternoDTO->retStrTelefoneContato();
+			$objUsuarioExternoDTO->retStrTelefoneFixo();
+			$objUsuarioExternoDTO->retStrTelefoneCelular();
 			$objUsuarioExternoDTO->retStrEnderecoContato();
 			$objUsuarioExternoDTO->retStrBairroContato();
-			$objUsuarioExternoDTO->retStrSiglaEstadoContato();
-			$objUsuarioExternoDTO->retStrNomeCidadeContato();
+			
 			$objUsuarioExternoDTO->retStrCepContato();
 			$objUsuarioExternoDTO->retDthDataCadastroContato();
 				
