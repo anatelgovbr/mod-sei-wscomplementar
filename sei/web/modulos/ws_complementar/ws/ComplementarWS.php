@@ -49,7 +49,6 @@ class ComplementarWS extends InfraWS {
   		$contatoDTO->setNumIdContato( $UsuarioExternoDTO->getNumIdContato() );
   		$contatoRN = new ContatoRN();
   		$contatoDTO = $contatoRN->consultarRN0324( $contatoDTO );
-  		$Cpf = $contatoDTO->getDblCpf();
   		
   		if (strlen(trim($Cpf)) > 0 && (InfraUtil::formatarCpf( $contatoDTO->getDblCpf() ) !== InfraUtil::formatarCpf($Cpf))) {
   		  $InfraException->lancarValidacao('CPF informado não corresponde ao registrado no cadastro do Usuário Externo no SEI.');
@@ -79,7 +78,7 @@ class ComplementarWS extends InfraWS {
   				'IdUsuario' => $UsuarioExternoDTO->getNumIdUsuario(),
   				'E-mail' => $UsuarioExternoDTO->getStrSigla(),
   				'Nome' => $UsuarioExternoDTO->getStrNome(),
-  				'Cpf' => InfraUtil::formatarCpf($Cpf),
+  				'Cpf' => InfraUtil::formatarCpf($contatoDTO->getDblCpf()),
   				'SituacaoAtivo' => $UsuarioExternoDTO->getStrSinAtivo(),
   				'LiberacaoCadastro' => $UsuarioExternoDTO->getStrStaTipo(),
   				'Rg' => $UsuarioExternoDTO->getDblRgContato(),
