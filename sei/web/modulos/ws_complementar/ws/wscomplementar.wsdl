@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wsdl:definitions
+    name="WScomplementar"
+    targetNamespace="SeiWScomplementar"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tns="SeiWScomplementar">
+      
+  <wsdl:message name="consultarUsuarioExternoRequest">
+    <wsdl:part name="SiglaSistema" type="xsd:string"/>
+    <wsdl:part name="IdentificacaoServico" type="xsd:string"/>
+    <wsdl:part name="Email" type="xsd:string"/>
+    <wsdl:part name="Cpf" type="xsd:string"/>
+  </wsdl:message>
+
+  <wsdl:message name="consultarUsuarioExternoResponse">
+    <wsdl:part name="parametros" type="tns:RetornoConsultarUsuarioExterno"/>
+  </wsdl:message>
+  
+  <wsdl:portType name="SeiWScomplementarPortType">
+    <wsdl:operation name="consultarUsuarioExterno">
+      <wsdl:documentation>Consulta Usuário Externo</wsdl:documentation>
+      <wsdl:input message="tns:consultarUsuarioExternoRequest"/>
+      <wsdl:output message="tns:consultarUsuarioExternoResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="SeiWScomplementarBinding" type="tns:SeiWScomplementarPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+    <wsdl:operation name="consultarUsuarioExterno">
+       <soap:operation soapAction="SeiWScomplementarAction" />
+     <wsdl:input>
+       <soap:body namespace="SeiWScomplementar" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+     </wsdl:input>
+     <wsdl:output>
+      <soap:body namespace="SeiWScomplementar" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+     </wsdl:output>
+    </wsdl:operation>
+
+  </wsdl:binding>
+
+  <wsdl:service name="SeiWScomplementarService">
+    <wsdl:port name="SeiWScomplementarPortService" binding="tns:SeiWScomplementarBinding">
+      <soap:address location="[servidor]/modulos/ws_complementar/ws/ComplementarWS.php"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>
