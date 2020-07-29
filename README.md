@@ -3,7 +3,7 @@
 ## Requisitos
 - SEI 3.1.3 instalado/atualizado.
    - Verificar valor da constante de versão no arquivo /sei/web/SEI.php ou, após logado no sistema, parando o mouse sobre a logo do SEI no canto superior esquerdo.
-- Os códigos-fonte do Módulo podem ser baixados a partir do link a seguir, devendo sempre utilizar a versão mais recente: [https://softwarepublico.gov.br/gitlab/anatel/mod-sei-wscomplementar/tags](https://softwarepublico.gov.br/gitlab/anatel/mod-sei-wscomplementar/tags "Clique e acesse")
+- Os códigos-fonte do Módulo podem ser baixados a partir do link a seguir, devendo sempre utilizar a versão mais recente: [https://github.com/anatelgovbr/mod-sei-wscomplementar/releases](https://github.com/anatelgovbr/mod-sei-wscomplementar/releases "Clique e acesse")
 
 ## Procedimentos para Instalação
 1. Carregar no servidor os arquivos do módulo nas pastas correspondentes nos servidores do SEI e do SIP.
@@ -17,5 +17,5 @@
 			),
 
 3. O endereço do WSDL do módulo é o seguinte: http://[dominio_servidor]/sei/controlador_ws.php?servico=wscomplementar
-4. Manual e demais orientações constam na Wiki do Projeto Principal: https://softwarepublico.gov.br/gitlab/anatel/mod-sei-wscomplementar/wikis/home
-5. O projeto desse módulo é de desenvolvimento colaborativo, devendo seguir a metodologia definida, especialmente abrindo Issue antes de qualquer desenvolvimento. Link para o projeto principal: https://softwarepublico.gov.br/gitlab/anatel/mod-sei-wscomplementar
+4. Manual e demais orientações constam na Wiki do Projeto Principal: https://github.com/anatelgovbr/mod-sei-wscomplementar/wiki
+5. O projeto desse módulo é de desenvolvimento colaborativo, devendo seguir a metodologia definida, especialmente abrindo Issue antes de qualquer desenvolvimento. Link para o projeto principal: https://github.com/anatelgovbr/mod-sei-wscomplementar
